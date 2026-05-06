@@ -1,0 +1,8 @@
+streamlit
+pandas==2.2.2
+numpy==1.26.4
+plotly
+folium
+streamlit-folium
+xgboost==3.2.0
+scikit-learn==1.6.1

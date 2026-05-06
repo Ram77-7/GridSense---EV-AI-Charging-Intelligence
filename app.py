@@ -1,12 +1,14 @@
 import streamlit as st 
-
 import pandas as pd 
-import folium
 import numpy as np 
 import pickle 
 import warnings
+import folium
+from streamlit_folium import st_folium
+import plotly.graph_objects as go
+import plotly.express as px
 from datetime import datetime
-
+import json
 warnings.filterwarnings('ignore')
 
 st.set_page_config(
@@ -190,8 +192,7 @@ with st.sidebar:
     else:
         grid_status       = "🟢 STABLE"
         grid_status_color = "#16A34A"
-   # ── Live Clock ────────────────────────────────────────────────────
-    from datetime import datetime
+   # ── Live Clock ──────────────────────────────────────────────────── 
     now = datetime.now()
     st.components.v1.html(
         "<div style='text-align:center; background:#0F172A; border-radius:10px; "
@@ -454,7 +455,7 @@ if page == 'Zone Overview':
     with tab1:
         st.subheader("📊 KPI Metrics")
 
-        import json
+        
 
         total_stations = int(capacity['stations_count'].sum())
         total_chargers = int(capacity['total_chargers'].sum())
@@ -910,8 +911,7 @@ if page == 'Zone Overview':
         st.markdown("<br>", unsafe_allow_html=True)
 
         # ── Build Folium Map ──────────────────────────────────────────
-        import folium
-        from streamlit_folium import st_folium
+       
 
         m = folium.Map(
             location=[12.9716, 77.5946],
@@ -1232,7 +1232,7 @@ elif page == 'Demand Forecast':
     st.divider()
 
     # ── Forecast Chart ────────────────────────────────────────────────
-    import plotly.graph_objects as go
+    
 
 
     # ── Tab Navigation ────────────────────────────────────────────────
@@ -1896,7 +1896,6 @@ elif page == 'Grid Stress Index':
 
     # ── Tab 1 : GSI Bar Chart ─────────────────────────────────────────
     with gsi_tab1:
-        import plotly.graph_objects as go
 
         # ── Full width bar chart + off-peak side by side ──────────────
         col_left, col_right = st.columns([1.5, 1])
@@ -2401,10 +2400,6 @@ elif page == 'Grid Stress Index':
         
 
 elif page == 'Infrastructure Planner':
-    import plotly.graph_objects as go
-    import plotly.express as px
-    from streamlit_folium import st_folium
-    import folium
 
     st.title('🔭 Infrastructure Planner')
     st.write("Priority Score = (Unmet Demand × 0.4) + (EV Growth Rate × 0.3) + (Low Station Density × 0.3)")
@@ -2747,7 +2742,6 @@ elif page == 'Infrastructure Planner':
         with col_right:
             # ── Chart 4: Treemap ──────────────────────────────────────
             st.markdown("**🗂️ Zone Priority Treemap**")
-            import plotly.express as px
             tree_fig = px.treemap(
                 infra_df,
                 path=['tier', 'zone_id'],

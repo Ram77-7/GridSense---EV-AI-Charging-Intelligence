@@ -7,3 +7,7 @@ textColor = "#E2E8F0"
 
 [server]
 maxUploadSize = 50
+headless = true
+
+[runtime]
+pythonVersion = "3.11"
